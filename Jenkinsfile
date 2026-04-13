@@ -9,8 +9,8 @@ pipeline {
         }
         stage('Setup') {
             steps {
-                sh 'pip install --break-system-packages --upgrade pip'
-                sh 'pip install --break-system-packages -r requirements.txt'
+                sh 'python3 -m pip install --break-system-packages --upgrade pip'
+                sh 'python3 -m pip install --break-system-packages -r requirements.txt'
             }
         }
         stage('Train') {
