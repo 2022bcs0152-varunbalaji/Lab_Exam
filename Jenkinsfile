@@ -9,13 +9,13 @@ pipeline {
         }
         stage('Setup') {
             steps {
-                sh 'pip3 install --break-system-packages --upgrade pip'
-                sh 'pip3 install --break-system-packages -r requirements.txt'
+                sh 'pip install --break-system-packages --upgrade pip'
+                sh 'pip install --break-system-packages -r requirements.txt'
             }
         }
         stage('Train') {
             steps {
-                sh 'python3 train.py'
+                sh 'python train.py'
             }
         }
         stage('Identity') {
