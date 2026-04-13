@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.11-slim'
+            args '-v /var/jenkins_home/workspace:/workspace'
+        }
+    }
     
     stages {
         stage('Checkout SCM') {
@@ -8,25 +13,16 @@ pipeline {
             }
         }
         
-        stage('Install Python') {
-            steps {
-                sh '''
-                    sudo apt-get update
-                    sudo apt-get install -y python3 python3-pip python3-venv
-                '''
-            }
-        }
-        
         stage('Setup') {
             steps {
-                sh 'python3 -m pip install --user --upgrade pip'
-                sh 'python3 -m pip install --user -r requirements.txt'
+                sh 'pip install --upgrade pip'
+                sh 'pip install -r requirements.txt'
             }
         }
         
         stage('Train') {
             steps {
-                sh 'python3 train.py'
+                sh 'python train.py'
             }
         }
         
