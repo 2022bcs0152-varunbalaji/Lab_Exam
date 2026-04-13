@@ -7,10 +7,9 @@ pipeline {
                 checkout scm
             }
         }
-    stages {
         stage('Setup') {
             steps {
-                sh 'pip install --upgrade pip'
+                sh 'pip install --break-system-packages --upgrade pip'
                 sh 'pip install --break-system-packages -r requirements.txt'
             }
         }
@@ -30,5 +29,4 @@ pipeline {
             }
         }
     }
-}
 }
