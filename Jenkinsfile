@@ -10,8 +10,11 @@ pipeline {
         }
         stage('Setup') {
             steps {
-                sh 'python3 -m pip install --upgrade pip'
-                sh 'python3 -m pip install -r requirements.txt'
+                sh '''
+                    apt-get update && apt-get install -y python3 python3-pip || true
+                    python3 -m pip install --break-system-packages --upgrade pip
+                    python3 -m pip install --break-system-packages -r requirements.txt
+                '''
             }
         }
         stage('Train') {
