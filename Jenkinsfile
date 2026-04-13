@@ -5,7 +5,11 @@ pipeline {
 
         stage('Setup') {
             steps {
-                sh 'python3 -m pip install -r requirements.txt'
+                sh '''
+                apt update
+                apt install -y python3-pip
+                pip3 install -r requirements.txt
+                '''
             }
         }
 
