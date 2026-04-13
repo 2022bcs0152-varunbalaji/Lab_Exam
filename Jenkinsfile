@@ -1,18 +1,21 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.10'
+        }
+    }
 
     stages {
 
         stage('Setup') {
             steps {
-                sh 'echo "Setup stage skipped (no root access)"'
+                sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Train') {
             steps {
-                sh 'python3 -m pip install --user pandas numpy scikit-learn joblib'
-                sh 'python3 train.py'
+                sh 'python train.py'
             }
         }
 
