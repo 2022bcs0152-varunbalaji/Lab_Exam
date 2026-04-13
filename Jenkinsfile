@@ -1,9 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.10'
+    agent any
+
+    stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout scm
+            }
         }
-    }
     stages {
         stage('Setup') {
             steps {
@@ -27,4 +30,5 @@ pipeline {
             }
         }
     }
+}
 }
