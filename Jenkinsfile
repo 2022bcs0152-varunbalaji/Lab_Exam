@@ -26,7 +26,6 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                // Removed space after comma for safer globbing
                 archiveArtifacts artifacts: 'model.pkl,metrics.json'
             }
         }
