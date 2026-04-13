@@ -6,16 +6,18 @@ pipeline {
         stage('Setup') {
             steps {
                 sh '''
-                apt update
-                apt install -y python3-pip
-                pip3 install -r requirements.txt
+                python3 --version || true
+                apt-get update
+                apt-get install -y python3 python3-pip
+                python3 -m pip install --upgrade pip
+                python3 -m pip install -r requirements.txt
                 '''
             }
         }
 
         stage('Train') {
             steps {
-                sh 'python train.py'
+                sh 'python3 train.py'
             }
         }
 
