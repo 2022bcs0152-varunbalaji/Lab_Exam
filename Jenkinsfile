@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout SCM') {
             steps {
@@ -9,7 +8,6 @@ pipeline {
         }
         stage('Setup') {
             steps {
-                sh 'apt-get update && apt-get install -y python3 python3-pip'
                 sh 'python3 -m pip install --break-system-packages --upgrade pip'
                 sh 'python3 -m pip install --break-system-packages -r requirements.txt'
             }
