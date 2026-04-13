@@ -5,12 +5,13 @@ pipeline {
 
         stage('Setup') {
             steps {
-                sh 'apt-get update && apt-get install -y python3 python3-pip && python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt'
+                sh 'echo "Setup stage skipped (no root access)"'
             }
         }
 
         stage('Train') {
             steps {
+                sh 'python3 -m pip install --user pandas numpy scikit-learn joblib'
                 sh 'python3 train.py'
             }
         }
