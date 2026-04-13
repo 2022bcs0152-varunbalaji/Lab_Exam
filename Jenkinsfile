@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'python:3.11-slim' }
+    }
     stages {
         stage('Checkout SCM') {
             steps {
@@ -8,8 +10,8 @@ pipeline {
         }
         stage('Setup') {
             steps {
-                sh 'python3 -m pip install --break-system-packages --upgrade pip'
-                sh 'python3 -m pip install --break-system-packages -r requirements.txt'
+                sh 'python3 -m pip install --upgrade pip'
+                sh 'python3 -m pip install -r requirements.txt'
             }
         }
         stage('Train') {
@@ -24,7 +26,8 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'model.pkl, metrics.json'
+                // Removed space after comma for safer globbing
+                archiveArtifacts artifacts: 'model.pkl,metrics.json'
             }
         }
     }
